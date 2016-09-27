@@ -1,0 +1,14 @@
+- hosts: leaf1
+  vars:
+    description: “this is a leaf switch”
+  remote_user: root
+  tasks:
+  - name: write the quagga config file
+    template: src=quagga.j2 dest=/etc/quagga/Quagga.conf
+    notify:
+    - restart quagga
+  - name: ensure quagga is running
+    service: name=quagga state=started
+  handlers:
+    - name: restart quagga
+      service: name=quagga state=restarted
