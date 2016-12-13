@@ -1,4 +1,7 @@
-- name: Enable EPEL (Extra Packages for Enterprise Linux)
-  yum:
-    name: http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    state: present
+- hosts: blah
+  remote_user: root
+  tasks:
+  - name: Enable EPEL (Extra Packages for Enterprise Linux)
+    yum:
+      name: http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: present
