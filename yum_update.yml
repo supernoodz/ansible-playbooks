@@ -1,5 +1,5 @@
-- hosts: blah
-  remote_user: root
+- name: yum update
+  hosts: all
   tasks:
   - name: upgrade all packages
     yum:
