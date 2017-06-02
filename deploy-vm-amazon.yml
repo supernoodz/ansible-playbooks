@@ -7,7 +7,7 @@
       ec2:
         key_name: cfme-ec2-5.8.0.17
         region: eu-west-1
-        zone: eu-west-1b
+        zone: eu-west-1c
         instance_type: t2.micro
         image: ami-de3021b8
         wait: yes
