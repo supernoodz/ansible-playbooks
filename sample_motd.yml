@@ -1,9 +1,8 @@
-- hosts: all 
-  remote_user: root
-  vars: 
-    motd_welcome: 'Updated by CloudForms'
+---
+- hosts: localhost
+  user: root
+  vars:
+    motd_nick: 'My new motd message'
   tasks:
-  - name: sample motd
-    copy:
-    dest: /etc/motd
-    content: "{{ motd_welcome }}"
+    - name: setup a MOTD
+      copy: dest=/etc/motd content="{{ motd_nick }}"
