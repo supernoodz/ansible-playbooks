@@ -1,8 +1,5 @@
 ---
-- hosts: localhost
-  user: root
-  vars:
-    motd_nick: 'My new motd message'
+- hosts: all
   tasks:
-    - name: setup a MOTD
-      copy: dest=/etc/motd content="{{ motd_nick }}"
+  - name: ping all hosts
+    ping:
