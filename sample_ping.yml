@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  user: root
   vars:
     motd_nick: 'My new motd message'
   tasks:
