@@ -11,7 +11,7 @@
         instance_type: t2.micro
         image: ami-de3021b8
         wait: yes
-        group: sg-a91d1ad0
+        group: cloudforms
         vpc_subnet_id: subnet-933cfbe4
         assign_public_ip: yes
         monitoring: no
