@@ -1,9 +1,7 @@
 ---
 - hosts: all
   vars:
-    my_message: 'CloudForms was here'
+    my_message: '\n\nCreated by CloudForms using Ansible\n\n'
   tasks:
     - name: Create a file...
       copy: dest=~/cloudforms.txt content="{{ my_message }}"
-    - name: Create another file...
-      copy: dest=/root/cloudforms.txt content="{{ my_message }}"
