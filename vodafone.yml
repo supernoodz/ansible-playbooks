@@ -1,13 +1,9 @@
 ---
 - hosts: all
 
-  roles:
-    - php
-    - nginx
-
   environment:
     http_proxy: http://62.81.0.143:80
-    https_proxy: http://62.81.0.143:80
+    https_proxy: http://62.81.0.143:80 
   
   tasks:
   - name: Subscribe 
