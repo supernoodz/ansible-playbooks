@@ -9,7 +9,6 @@
   - name: Configure proxy 
     command: subscription-manager config --server.proxy_hostname=62.81.0.143 --server.proxy_port=80
 
-  tasks:
   - name: Subscribe 
     command: subscription-manager register --username {{ rhn_user }} --password {{ rhn_pass }} --force
     
