@@ -7,7 +7,7 @@
   
   tasks:
   - name: Subscribe 
-    command: subscription-manager register --username iveronar1@redhat.com --password f7C-Zqk-ctH-SCG --force
+    command: subscription-manager register --username { rhn_user } --password { rhn_pass } --force
     
   - name: Attach pool 
     #command: subscription-manager attach --pool=8a85f98144844aff014488d059f61625
