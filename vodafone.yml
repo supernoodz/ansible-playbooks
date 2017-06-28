@@ -22,15 +22,22 @@
   - name: Enable repos 
     command: subscription-manager repos --enable=rhel-7-server-optional-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-rh-common-rpms --enable=rhel-7-server-rpms 
   
-  - name: install the EPEL repo
-    yum:
-      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-      state: present
+  - name: Copy required RPMs
+    copy:
+      src: rpms
+      dest: /root/      
+
+  # - name: install the EPEL repo
+  #   yum:
+  #     name: /root/rpms/epel-release-latest-7.noarch.rpm
+  #     state: present
 
   - name: "Install Nagios NRPE"
     yum: state=present name={{ item }}
     with_items:
-    - nrpe
+    - /root/rpms/nagios-common-4.2.4-2.el7.x86_64.rpm
+    - /root/rpms/nrpe-2.15-7.el7.x86_64.rpm
+
 
   - name: Push NRPE configuration
     copy:
@@ -57,10 +64,12 @@
       state: started 
       enabled: yes
 
-  - name: Install ntp
-    yum:
-      name: ntp
-      state: present
+  - name: "Install NTP"
+    yum: state=present name={{ item }}
+    with_items:
+    - /root/rpms/autogen-libopts-5.18-5.el7.x86_64.rpm
+    - /root/rpms/ntpdate-4.2.6p5-25.el7_3.2.x86_64.rpm
+    - /root/rpms/ntp-4.2.6p5-25.el7_3.2.x86_64.rpm
 
   - name: Disable chronyd
     systemd:
@@ -68,14 +77,13 @@
       state: stopped 
       enabled: no
 
-  - name: enable service ntpd
-    systemd:
-      name: ntpd
-      state: started 
-      enabled: yes
-
   - name: Push NTP configuration
     copy:
       src: config_files/ntp.conf
       dest: /etc/ntp.conf
         
+  - name: enable service ntpd
+    systemd:
+      name: ntpd
+      state: started 
+      enabled: yes
