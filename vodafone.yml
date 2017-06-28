@@ -6,6 +6,18 @@
     https_proxy: http://62.81.0.143:80 
   
   tasks:
+
+  - name: "Add entries to /etc/hosts"
+    # become: true
+    # become_method: su
+    lineinfile: dest=/etc/hosts
+                line='{{item}}'
+    with_items:
+      - ""
+      - "### Backup"
+      - "192.168.2.2 server01"
+      - "192.168.2.3 server01-backup"
+
   - name: Configure proxy 
     command: subscription-manager config --server.proxy_hostname=62.81.0.143 --server.proxy_port=80
 
