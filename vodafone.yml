@@ -71,11 +71,11 @@
     - /root/rpms/ntpdate-4.2.6p5-25.el7_3.2.x86_64.rpm
     - /root/rpms/ntp-4.2.6p5-25.el7_3.2.x86_64.rpm
 
-  - name: Disable chronyd
-    systemd:
-      name: chronyd
-      state: stopped 
-      enabled: no
+  # - name: Disable chronyd
+  #   systemd:
+  #     name: chronyd
+  #     state: stopped 
+  #     enabled: no
 
   - name: Push NTP configuration
     copy:
