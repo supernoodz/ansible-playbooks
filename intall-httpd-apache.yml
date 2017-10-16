@@ -6,8 +6,18 @@
   
   tasks:
 
-  - name: Install httpd rpm
-    yum: name=httpd
+  - name: Copy required RPM
+    copy:
+      src: rpms/httpd-2.2.15-59.el6.centos.x86_64.rpm
+      dest: /root/
+
+  # - name: Install httpd RPM
+  #   yum: name=httpd
+
+  - name: Install httpd RPM
+    yum: state=present name={{ item }}
+    with_items:
+    - /root/rpms/httpd-2.2.15-53.el6.x86_64.rpm
 
   - name: start httpd service
     service: name=httpd state=started
