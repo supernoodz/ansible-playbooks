@@ -6,10 +6,18 @@
   
   tasks:
 
-  - name: Copy required RPM
+  - name: Copy required RPMs
     copy:
-      src: rpms/httpd-2.2.15-59.el6.centos.x86_64.rpm
+      src: rpms/{{ item }}
       dest: /root/
+    with_items:
+    - libselinux-2.0.94-7.el6.x86_64.rpm
+    - httpd-2.2.15-59.el6.centos.x86_64.rpm
+
+  - name: Install libselinux RPM
+    yum: state=present name={{ item }}
+    with_items:
+    - /root/rpms/libselinux-2.0.94-7.el6.x86_64.rpm
 
   # - name: Install httpd RPM
   #   yum: name=httpd
