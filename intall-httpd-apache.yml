@@ -1,0 +1,19 @@
+---
+- hosts: all
+
+  environment:
+    http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:80
+  
+  tasks:
+
+  - name: Install httpd rpm
+    yum: name=httpd
+
+  - name: start httpd service
+    service: name=httpd state=started
+
+  - name: Open Port 80
+    firewalld: service=http permanent=true state=enabled
+
+  - name: Start firewalld service
+    service: name=firewalld state=restarted
