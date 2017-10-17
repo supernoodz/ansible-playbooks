@@ -1,0 +1,39 @@
+---
+- hosts: all
+
+  # environment:
+  #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:80
+  
+  tasks:
+
+  - name: Copy required RPMs
+    copy:
+      src: rpms/{{ item }}
+      dest: /root/
+    with_items:
+    - httpd-2.4.6-67.el7.centos.x86_64.rpm
+    - apr-1.4.8-3.el7.x86_64.rpm
+    - mailcap-2.1.41-2.el7.noarch.rpm
+    - httpd-tools-2.4.6-67.el7.centos.x86_64.rpm
+    - apr-util-1.5.2-6.el7.x86_64.rpm
+
+  # - name: Install httpd RPM
+  #   yum: name=httpd
+
+  - name: Install httpd RPM
+    yum: state=present name=/root/{{ item }}
+    with_items:
+    - httpd-2.4.6-67.el7.centos.x86_64.rpm
+    - apr-1.4.8-3.el7.x86_64.rpm
+    - mailcap-2.1.41-2.el7.noarch.rpm
+    - httpd-tools-2.4.6-67.el7.centos.x86_64.rpm
+    - apr-util-1.5.2-6.el7.x86_64.rpm
+
+  - name: start httpd service
+    service: name=httpd state=started
+
+  - name: Open Port 80
+    firewalld: service=http permanent=true state=enabled
+
+  - name: Start firewalld service
+    service: name=firewalld state=restarted
