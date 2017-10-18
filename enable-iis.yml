@@ -12,8 +12,8 @@
   
   tasks:
   - debug: var=proxy_url
-  - debug: var=proxy_user
-  - debug: var=proxy_password
+  # - debug: var=proxy_user
+  # - debug: var=proxy_password
 
   - name: Enable IIS feature
     win_feature:
@@ -25,13 +25,13 @@
       dest: C:\inetpub\wwwroot\index.html 
       content: <html><head><title>{{ web_title_iis }}</title></head><body><img src="logo.png"></img><p>{{ welcome_msg }}</body></html>
 
-  - name: Get logo
-    win_get_url:
-      url: http://vector.me/files/images/4/9/49666/red_hat.png
-      dest: C:\inetpub\wwwroot\logo.png
-      proxy_url: "{{ proxy_url }}"
-      proxy_username: "{{ proxy_user }}"
-      proxy_password: "{{ proxy_password }}"
+  # - name: Get logo
+  #   win_get_url:
+  #     url: http://vector.me/files/images/4/9/49666/red_hat.png
+  #     dest: C:\inetpub\wwwroot\logo.png
+  #     proxy_url: "{{ proxy_url }}"
+  #     proxy_username: "{{ proxy_user }}"
+  #     proxy_password: "{{ proxy_password }}"
 
   #install tools
 
