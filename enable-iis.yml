@@ -1,9 +1,6 @@
 ---
 - hosts: all
 
-  environment:
-    http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:{{ proxy_port }}
-
   vars: 
     # web_title_iis: "{{ web_title_iis }}"
     # welcome_msg: "{{ welcome_msg }}"
@@ -27,6 +24,9 @@
     win_get_url:
       url: http://vector.me/files/images/4/9/49666/red_hat.png
       dest: C:\inetpub\wwwroot\logo.png
+      proxy_url: http://{{ http_proxy }}:{{ proxy_port }}
+      proxy_username: "{{ proxy_user }}"
+      proxy_password: "{{ proxy_password }}"
 
   #install tools
 
