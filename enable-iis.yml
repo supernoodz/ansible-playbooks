@@ -10,9 +10,8 @@
     # ansible_winrm_server_cert_validation: ignore
   
   tasks:
-  - debug:
-    var: http_proxy
-    var: proxy_port
+  - debug: var=http_proxy
+  - debug: var=proxy_port
 
   - name: Enable IIS feature
     win_feature:
