@@ -10,21 +10,25 @@
     # ansible_winrm_server_cert_validation: ignore
   
   tasks:
+  - debug:
+    var: http_proxy
+    var: proxy_port
+
   - name: Enable IIS feature
     win_feature:
-      name: Web-Server 
+      name: Web-Server
       state: present
 
   - name: Create new home page
     win_copy:
-      dest: c:\inetpub\wwwroot\index.html 
+      dest: C:\inetpub\wwwroot\index.html 
       content: <html><head><title>{{ web_title_iis }}</title></head><body><img src="logo.png"></img><p>{{ welcome_msg }}</body></html>
 
   - name: Get logo
     win_get_url:
       url: http://vector.me/files/images/4/9/49666/red_hat.png
       dest: C:\inetpub\wwwroot\logo.png
-      proxy_url: http://{{ http_proxy }}:{{ proxy_port }}
+      proxy_url: "http://{{ http_proxy }}:{{ proxy_port }}"
       proxy_username: "{{ proxy_user }}"
       proxy_password: "{{ proxy_password }}"
 
