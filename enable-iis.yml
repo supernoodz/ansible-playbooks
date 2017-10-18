@@ -25,3 +25,20 @@
     win_get_url:
       url: http://vector.me/files/images/4/9/49666/red_hat.png
       dest: C:\inetpub\wwwroot\logo.png
+
+  #install tools
+
+  # - name: Install Git
+  #   win_chocolatey:
+  #     name: git
+  #     state: present
+
+  # - name: Install Putty
+  #   win_chocolatey:
+  #     name: putty.install
+  #     state: present
+
+  # - name: Install Sysinternals
+  #   win_chocolatey:
+  #     name: sysinternals
+  #     state: present
