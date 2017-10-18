@@ -1,0 +1,27 @@
+---
+- hosts: all
+
+  # environment:
+  #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:80
+
+  vars: 
+    # web_title_iis: "{{ web_title_iis }}"
+    # welcome_msg: "{{ welcome_msg }}"
+    web_title_iis: 'Created by CloudForms using Ansible'
+    welcome_msg: 'Created by CloudForms using Ansible'
+  
+  tasks:
+  - name: Enable IIS feature
+    win_feature:
+      name: Web-Server 
+      state: present
+
+  - name: Create new home page
+    win_copy:
+      dest: c:\inetpub\wwwroot\index.html 
+      content: <html><head><title>{{ web_title_iis }}</title></head><body><img src="logo.png"></img><p>{{ welcome_msg }}</body></html>
+
+  - name: Get logo
+    win_get_url:
+      url: http://vector.me/files/images/4/9/49666/red_hat.png
+      dest: C:\inetpub\wwwroot\logo.png
