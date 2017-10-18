@@ -2,7 +2,7 @@
 - hosts: all
 
   # environment:
-  #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:80
+  #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:{{ proxy_port }}
   
   tasks:
 

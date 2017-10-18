@@ -1,14 +1,16 @@
 ---
 - hosts: all
 
-  # environment:
-  #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:80
+  environment:
+    http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:{{ proxy_port }}
 
   vars: 
     # web_title_iis: "{{ web_title_iis }}"
     # welcome_msg: "{{ welcome_msg }}"
     web_title_iis: 'Created by CloudForms using Ansible'
     welcome_msg: 'Created by CloudForms using Ansible'
+    # ansible_connection: winrm
+    # ansible_winrm_server_cert_validation: ignore
   
   tasks:
   - name: Enable IIS feature
