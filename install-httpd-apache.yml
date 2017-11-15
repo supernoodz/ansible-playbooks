@@ -1,9 +1,10 @@
 ---
 - hosts: all
 
-  # environment:
+  environment:
   #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:{{ proxy_port }}
-  
+    ansible_host_key_checking: false
+    
   tasks:
 
   - name: Copy required RPMs
