@@ -1,0 +1,20 @@
+---
+- hosts: all
+
+  environment:
+  #   http_proxy: http://{{ proxy_user }}:{{ proxy_password }}@{{ http_proxy }}:{{ proxy_port }}
+    # ansible_host_key_checking: false
+    
+  tasks:
+
+  - name: Install httpd RPM
+    yum: name=httpd
+
+  - name: start httpd service
+    service: name=httpd state=started
+
+  - name: Open Port 80
+    firewalld: service=http permanent=true state=enabled
+
+  - name: Start firewalld service
+    service: name=firewalld state=restarted
