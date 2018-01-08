@@ -1,0 +1,8 @@
+---
+- hosts: all
+  
+  tasks:
+  - debug: var=ad_useruser
+
+# https://technet.microsoft.com/en-gb/library/ee617253.aspx
+  - win_shell: New-ADUser {{ ad_useruser }}
