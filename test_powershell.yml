@@ -1,0 +1,4 @@
+---
+- hosts: all
+
+  - win_shell: $env:COMPUTERNAME
