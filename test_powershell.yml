@@ -6,4 +6,4 @@
     register: win_shell_out
 
   - debug:
-    var: win_shell_out.stdout_lines
+      var: win_shell_out.stdout_lines
