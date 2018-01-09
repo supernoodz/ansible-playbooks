@@ -3,3 +3,7 @@
 
   tasks:
   - win_shell: $env:COMPUTERNAME
+    register: win_shell_out
+
+  - debug:
+    var: win_shell_out.stdout_lines
