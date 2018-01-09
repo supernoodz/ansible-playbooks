@@ -1,4 +1,5 @@
 ---
 - hosts: all
 
-- win_shell: $env:COMPUTERNAME
+  tasks:
+  - win_shell: $env:COMPUTERNAME
