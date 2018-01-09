@@ -1,0 +1,12 @@
+---
+- hosts: all
+
+  tasks:
+  - debug: var=alias
+  - debug: var=domain
+
+  - win_shell: New-Mailbox -UserPrincipalName {{ alias }}@{{ domain }} -Alias {{ alias }} -Name "{{ alias }}" -Room -EnableRoomMailboxAccount $true -RoomMailboxPassword (ConvertTo-SecureString -String P@ssw0rd -AsPlainText -Force) -ResetPasswordOnNextLogon $true
+    register: win_shell_out
+
+  - debug:
+      var: win_shell_out.stdout_lines
