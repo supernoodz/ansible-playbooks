@@ -3,12 +3,12 @@
 
   tasks:
   - name: Create ps1
-      template:
-        src: "{{ playbook_dir }}/../templates/create-vm.ps1.j2"
-        dest: C:\Temp\create-vm.ps1
+    template:
+      src: "{{ playbook_dir }}/../templates/create-vm.ps1.j2"
+      dest: C:\Temp\create-vm.ps1
 
   - win_shell: C:\Temp\create-vm.ps1
-  
+
     register: win_shell_out
 
   - debug:
