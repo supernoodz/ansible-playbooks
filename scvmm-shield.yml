@@ -1,15 +1,21 @@
 ---
-- hosts: all
+- name: Do something on OpenStack with Ansible-Inside
+  hosts: all
 
   tasks:
-  - name: Create ps1
-    template:
-      src: "{{ playbook_dir }}/../templates/create-vm.ps1.j2"
-      dest: C:\Temp\create-vm.ps1
+    - debug: var=scvmm_image
+    - debug: var=vm_name
+    - debug: var=scvmm_host
+    - debug: var=scvmm_network
 
-  - win_shell: C:\Temp\create-vm.ps1
+    - name: Create ps1
+      template:
+        src: "{{ playbook_dir }}/../templates/create-vm.ps1.j2"
+        dest: C:\Temp\create-vm.ps1
 
-    register: win_shell_out
+    - win_shell: C:\Temp\create-vm.ps1
 
-  - debug:
-      var: win_shell_out.stdout_lines
+      register: win_shell_out
+
+    - debug:
+        var: win_shell_out.stdout_lines
