@@ -6,6 +6,7 @@
     - debug: var=scvmm_image
     - debug: var=vm_name
     - debug: var=scvmm_host
+    - debug: var=scvmm_datastore
     - debug: var=scvmm_network
 
     - name: Create ps1

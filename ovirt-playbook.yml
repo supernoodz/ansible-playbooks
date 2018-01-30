@@ -1,0 +1,62 @@
+---
+- hosts: localhost
+
+  tasks:
+    - block:
+
+      - name: Obtain SSO token
+        ovirt_auth:
+          url: "{{ ovirt_url }}"
+          username: "{{ ovirt_username }}"
+          password: "{{ ovirt_password }}"
+          insecure: true
+
+      - name: Create shared disk
+        ovirt_disks:
+          auth: "{{ ovirt_auth }}"
+          name: "{{ prefix }}_shared_disk"
+          format: raw
+          shareable: true
+          size: 1GiB
+          state: detached
+          storage_domain: "{{ storage_domain }}"
+          wait: true
+
+      - name: Create first VM
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          state: present
+          name: "{{ prefix }}_1"
+          template: "{{ vm_template }}"
+          cluster: "{{ cluster }}"
+
+      - name: Create second VM
+        ovirt_vms:
+          auth: "{{ ovirt_auth }}"
+          state: present
+          name: "{{ prefix }}_2"
+          template: "{{ vm_template }}"
+          cluster: "{{ cluster }}"
+          wait: true
+
+      - name: Add shared disk
+        ovirt_disks:
+          auth: "{{ ovirt_auth }}"
+          name: "{{ prefix }}_shared_disk"
+          interface: virtio
+          state: attached
+          vm_name: "{{ prefix }}_1"
+
+      - name: Add shared disk
+        ovirt_disks:
+          auth: "{{ ovirt_auth }}"
+          name: "{{ prefix }}_shared_disk"
+          interface: virtio
+          state: attached
+          vm_name: "{{ prefix }}_2"
+
+      always:
+        - name: Revoke SSO token
+          ovirt_auth:
+            state: absent
+            ovirt_auth: "{{ ovirt_auth }}"
