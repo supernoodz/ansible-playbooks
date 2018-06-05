@@ -1,0 +1,23 @@
+---
+- hosts: all
+
+  tasks:
+  - name: Install httpd package
+    yum:
+      name: httpd
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+
+  - name: Configure firewall
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+
+  - name: Start firewalld service
+    service:
+      name: firewalld
+      state: restarted
