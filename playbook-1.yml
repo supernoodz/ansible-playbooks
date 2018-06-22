@@ -1,0 +1,6 @@
+---
+- name: Do something...
+  hosts: all
+
+  tasks:
+    - debug: var=hosts
