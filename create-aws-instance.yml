@@ -1,0 +1,72 @@
+---
+- name: Setup an EC2 instance
+  hosts: all
+  connection: local
+  vars:
+    manageiq_validate_certs: false
+    key_name: latest
+    vm_name: "{{ hosts }}"
+    security_group: cloudforms
+    instance_type: t2.micro
+    region: eu-west-1
+    image: ami-de3021b8
+    subnet: subnet-933cfbe4
+    href: services/80
+    provider_id: 1
+
+  roles:
+  - syncrou.manageiq-automate
+  - syncrou.manageiq-vmdb
+  
+  tasks:
+    - name: Save tower_job_id in $evm.root
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        set_attribute:
+          object: root
+          attribute: tower_job_id
+          value:  "{{ tower_job_id }}"
+
+    - name: Get a VMDB object
+      manageiq_vmdb:
+        href: "{{ href }}"
+      register: vmdb_object
+
+    - name: Create EC2 Instance
+      ec2:
+        key_name: "{{ key }}"
+        instance_tags: {Name: "{{ vm_name }}"}
+        group_id: "{{ security_group }}"
+        instance_type: "{{ instance_type }}"
+        region: "{{ region }}"
+        image: "{{ image }}"
+        wait: yes
+        count: 1
+        vpc_subnet_id: "{{ subnet }}"
+        assign_public_ip: yes
+      register: ec2
+
+    - name: Link the instance to its service
+      manageiq_vmdb:
+        vmdb: "{{ vmdb_object }}"
+        action: add_provider_vms
+        data:
+          uid_ems:
+            - "{{ ec2.instances[0].id }}"
+          provider:
+            id: " {{ provider_id }}"
+
+    - name: Wait for SSH to start
+      wait_for:
+        host: "{{ ec2.instances[0].public_ip }}"
+        port: 22
+        timeout: 300
+      delegate_to: localhost
+
+    - name: Save public_ip in $evm.root
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        set_attribute:
+          object: root
+          attribute: public_ip
+          value:  "{{ ec2.instances[0].public_ip }}"

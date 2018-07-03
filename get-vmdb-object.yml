@@ -1,0 +1,23 @@
+---
+- name: get vmdb object 
+  hosts: localhost
+  connection: local
+  
+  vars:
+    - manageiq_validate_certs: false
+      
+  roles:
+    - syncrou.manageiq-automate
+
+  tasks:
+    - name: "Get the full list of Objects"
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        get_object_names: yes
+
+    - name: Grab a vmdb object
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        get_vmdb_object:
+          object: root
+          attribute: service
