@@ -12,7 +12,8 @@
     image: ami-8f9442f8
     subnet: subnet-933cfbe4
     # href: services/80
-    provider_id: "{{ provider_id }}"
+    # provider_id: "{{ provider_id }}"
+    provider_id: 7
 
   roles:
   - syncrou.manageiq-automate
