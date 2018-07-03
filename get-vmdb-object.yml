@@ -11,6 +11,14 @@
     - syncrou.manageiq-automate
 
   tasks:
+    - name: "Set the job ID back into $evm.root"
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        set_attribute:
+          object: "root"
+          attribute: "tower_job_id"
+          value:  "{{ tower_job_id }}"
+
     - name: "Get the full list of Objects"
       manageiq_automate:
         workspace: "{{ workspace }}"
