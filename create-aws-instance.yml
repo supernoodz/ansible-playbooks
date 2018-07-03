@@ -5,11 +5,11 @@
   vars:
     manageiq_validate_certs: false
     key_name: latest
-    vm_name: "{{ hosts }}"
-    security_group: cloudforms
+    vm_name: "{{ vm_name }}"
+    security_group: default
     instance_type: t2.micro
     region: eu-west-1
-    image: ami-de3021b8
+    image: ami-8f9442f8
     subnet: subnet-933cfbe4
     href: services/80
     provider_id: 1
