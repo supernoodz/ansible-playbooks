@@ -6,7 +6,7 @@
     manageiq_validate_certs: false
     key_name: latest
     vm_name: "{{ vm_name }}"
-    security_group: default
+    security_group: sg-ff1cb89a
     instance_type: t2.micro
     region: eu-west-1
     image: ami-8f9442f8
