@@ -24,8 +24,8 @@
         workspace: "{{ workspace }}"
         get_vmdb_object:
           object: root
-          attribute: service
-      register: service_object
+          attribute: service_id
+      register: service_id
 
     - debug:
-        msg: "{{ service_object[0].id }}"
+        msg: "{{ service_id }}"
