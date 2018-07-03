@@ -19,18 +19,6 @@
           attribute: "tower_job_id"
           value:  "{{ tower_job_id }}"
 
-    # - name: "Get the full list of Objects"
-    #   manageiq_automate:
-    #     workspace: "{{ workspace }}"
-    #     get_object_names: yes
-
-
-    - name: "Get the full list of Object Attribute Names"
-      manageiq_automate:
-        workspace: "{{ workspace }}"
-        get_object_attribute_names:
-          object: "root"
-
     - name: Grab a vmdb object
       manageiq_automate:
         workspace: "{{ workspace }}"
@@ -40,4 +28,4 @@
       register: service_object
 
     - debug:
-        msg: "{{ service_object }}"
+        msg: "{{ service_object[0].id }}"
