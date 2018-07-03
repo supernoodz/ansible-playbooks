@@ -11,21 +11,29 @@
     - syncrou.manageiq-automate
 
   tasks:
-    - name: "Set the job ID back into $evm.root"
+    - name: Set the job ID back into $evm.root
       manageiq_automate:
         workspace: "{{ workspace }}"
         set_attribute:
-          object: "root"
-          attribute: "tower_job_id"
+          object: root
+          attribute: tower_job_id
           value:  "{{ tower_job_id }}"
 
-    - name: Grab a vmdb object
+    - name: Get attribute
       manageiq_automate:
         workspace: "{{ workspace }}"
-        get_vmdb_object:
+        get_attribute:
           object: root
           attribute: service_id
-      register: id
+      register: service_id
+
+    # - name: Grab a vmdb object
+    #   manageiq_automate:
+    #     workspace: "{{ workspace }}"
+    #     get_vmdb_object:
+    #       object: root
+    #       attribute: service_id
+    #   register: id
 
     - debug:
-        msg: "{{ id }}"
+        msg: "{{ service_id }}"
