@@ -1,0 +1,3 @@
+---
+- src: syncrou.manageiq-automate
+- src: syncrou.manageiq-vmdb
