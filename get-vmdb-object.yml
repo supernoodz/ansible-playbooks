@@ -19,7 +19,12 @@
           attribute: tower_job_id
           value:  "{{ tower_job_id }}"
 
-    - name: Get attribute
+    - name: "Get the full list of Objects"
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        get_object_names: yes
+
+    - name: Get service_id
       manageiq_automate:
         workspace: "{{ workspace }}"
         get_attribute:
