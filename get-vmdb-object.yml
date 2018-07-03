@@ -25,7 +25,7 @@
         get_vmdb_object:
           object: root
           attribute: service_id
-      register: service_id
+      register: id
 
     - debug:
-        msg: "{{ service_id }}"
+        msg: "{{ id }}"
