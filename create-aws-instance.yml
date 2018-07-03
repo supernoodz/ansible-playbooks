@@ -11,15 +11,15 @@
     region: eu-west-1
     image: ami-8f9442f8
     subnet: subnet-933cfbe4
-    href: services/80
-    provider_id: 1
+    # href: services/80
+    provider_id: "{{ provider_id }}"
 
   roles:
   - syncrou.manageiq-automate
   - syncrou.manageiq-vmdb
   
   tasks:
-    - name: Save tower_job_id in $evm.root
+    - name: Set the job ID back into $evm.root
       manageiq_automate:
         workspace: "{{ workspace }}"
         set_attribute:
@@ -29,7 +29,7 @@
 
     - name: Get a VMDB object
       manageiq_vmdb:
-        href: "{{ href }}"
+        href: "href/{{ service_id }}"
       register: vmdb_object
 
     - name: Create EC2 Instance
@@ -54,7 +54,7 @@
           uid_ems:
             - "{{ ec2.instances[0].id }}"
           provider:
-            id: " {{ provider_id }}"
+            id: "{{ provider_id }}"
 
     - name: Wait for SSH to start
       wait_for:
