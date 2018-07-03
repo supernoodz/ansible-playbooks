@@ -28,6 +28,14 @@
           attribute: tower_job_id
           value:  "{{ tower_job_id }}"
 
+    - name: Get service_id
+      manageiq_automate:
+        workspace: "{{ workspace }}"
+        get_attribute:
+          object: root
+          attribute: service_id
+      register: service_id
+
     - name: Get a VMDB object
       manageiq_vmdb:
         href: "href/{{ service_id }}"
