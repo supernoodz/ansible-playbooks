@@ -43,7 +43,7 @@
 
     - name: Create EC2 Instance
       ec2:
-        key_name: "{{ key }}"
+        key_name: "{{ key_name }}"
         instance_tags: {Name: "{{ vm_name }}"}
         group_id: "{{ security_group }}"
         instance_type: "{{ instance_type }}"
