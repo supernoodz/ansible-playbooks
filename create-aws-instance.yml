@@ -9,7 +9,7 @@
     security_group: sg-ff1cb89a
     instance_type: t2.micro
     region: eu-west-1
-    image: ami-8f9442f8
+    image: ami-f2982a8b
     subnet: subnet-933cfbe4
     # href: services/80
     # provider_id: "{{ provider_id }}"
