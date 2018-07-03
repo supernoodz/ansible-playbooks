@@ -38,7 +38,7 @@
 
     - name: Get a VMDB object
       manageiq_vmdb:
-        href: "href/{{ service_id }}"
+        href: "href/{{ service_id.value }}"
       register: vmdb_object
 
     - name: Create EC2 Instance
