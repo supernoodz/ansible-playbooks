@@ -1,7 +1,11 @@
 ---
 - hosts: all
 
-  vars: 
+  vars:
+    ansible_connection: winrm
+    ansible_winrm_server_cert_validation: ignore
+    ansible_winrm_read_timeout_sec: 150
+    ansible_winrm_operation_timeout_sec: 120
     # web_title_iis: "{{ web_title_iis }}"
     # welcome_msg: "{{ welcome_msg }}"
     web_title_iis: 'Created by CloudForms using Ansible'
